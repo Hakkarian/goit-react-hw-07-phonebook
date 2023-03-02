@@ -5,11 +5,12 @@ export const selectIsLoading = state => state.contacts.loading;
 export const selectError = state => state.contacts.error;
 
 export const selectFilteredContacts = (state) => {
+  const contacts = selectAllContacts(state);
   const normalizedFilter = state.filter.toLowerCase();
-  return state.contacts.items?.filter(contact =>
+  return contacts.filter(contact =>
     contact.name.toLowerCase() !== normalizedFilter
       ? contact.name.toLowerCase().includes(normalizedFilter) ||
-      contact.number.includes(normalizedFilter)
+      contact.phone.includes(normalizedFilter)
       : console.log('NO')
   );
 }

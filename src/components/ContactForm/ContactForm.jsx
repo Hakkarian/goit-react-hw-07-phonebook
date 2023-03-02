@@ -1,12 +1,10 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
 import { ContactFormCss, ContactLabelCss } from "./ContactForm.styled";
 import { ButtonCss } from "components/App/App.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { rootSlice } from "redux/tasks/cont-slice";
 import { selectAllContacts } from "redux/tasks/cont-selectors";
 import { fetchAddContacts } from "redux/tasks/taskoperations";
-import { nanoid } from "nanoid";
+
 
 
 const ContactForm = () => {
@@ -43,10 +41,10 @@ const ContactForm = () => {
         }
         const disValue = dispatch(fetchAddContacts(payload))
         console.log(disValue);
-        // reset();
+        reset();
     }
     const reset = () => {
-      return setState({name: '', number: ''})
+      return setState({name: '', phone: ''})
   }
 
   return (
@@ -81,6 +79,8 @@ const ContactForm = () => {
     </ContactFormCss>
   );
 }
+
+export default ContactForm;
 
 // class ContactForm extends Component {
 //     state = {
@@ -142,8 +142,3 @@ const ContactForm = () => {
 //         );
 //     }
 // }
-
-
-
-
-export default ContactForm;

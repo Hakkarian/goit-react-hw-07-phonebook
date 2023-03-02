@@ -1,17 +1,11 @@
 import ContactForm from "components/ContactForm";
 import ContactList from "components/ContactList";
 import Filter from "components/Filter";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getIsLoading, selectAllContacts, selectError, selectIsLoading } from "redux/tasks/cont-selectors";
-import { fetchAllContacts } from "redux/tasks/taskoperations";
 import { ContactFlexCss } from "./App.styled";
 
 
 
 const App = () => {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   
   return (
     <ContactFlexCss>
