@@ -11,9 +11,9 @@ export const getAllContacts = async () => {
 }
 
 export const addContact = async (info) => {
-  const { result: data } = await cardsInstance.post("/contacts/", info);
-  console.log(data)
-  return data;
+  const { data: result } = await cardsInstance.post("/contacts/", info);
+  console.log(result)
+  return result;
 }
 
 export const deleteContact = async id => {
