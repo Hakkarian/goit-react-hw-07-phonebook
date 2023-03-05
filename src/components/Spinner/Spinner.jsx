@@ -1,13 +1,14 @@
-const { LineWave } = require("react-loader-spinner");
-const { useSelector } = require("react-redux")
-const { selectIsLoading, selectError } = require("redux/tasks/cont-selectors")
+import { useGetAllContactsQuery } from "redux/tasks/cont-slice";
+import {LineWave} from 'react-loader-spinner'
 
 const Spinner = () => {
-    const isLoading = useSelector(selectIsLoading);
-    const error = useSelector(selectError);
+    const { error, isLoading } = useGetAllContactsQuery();
+    // const isLoading = useSelector(selectIsLoading);
+    // const error = useSelector(selectError);
     return <>
         {error && <h1>An error occured while rendering your page</h1>}
-        {isLoading && <LineWave
+        
+        {isLoading && <LineWave 
     height = "80"
     width = "80"
     radius = "9"
@@ -15,7 +16,9 @@ const Spinner = () => {
     ariaLabel = "loading"
     wrapperStyle
     wrapperClass
-        />}</>
+        />}
+
+    </>
 }
 
 export default Spinner

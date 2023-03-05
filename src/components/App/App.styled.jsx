@@ -40,4 +40,8 @@ export const ButtonCss = styled.button`
     color: #303030;
     box-shadow: 2px 2px 1px 1px #171717;
   }
+  &:disabled {
+    background-color: lightgrey;
+    color: black;
+  }
 `;

@@ -1,30 +1,40 @@
+import toastr from "toastr";
 import { useState } from "react";
 import { ContactFormCss, ContactLabelCss } from "./ContactForm.styled";
 import { ButtonCss } from "components/App/App.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllContacts } from "redux/tasks/cont-selectors";
 import { fetchAddContacts } from "redux/tasks/taskoperations";
+import { useAddContactMutation, useAddContactQuery, useGetAllContactsQuery } from "redux/tasks/cont-slice";
 
 
 
 const ContactForm = () => {
-  const contacts = useSelector(selectAllContacts);
-  const [ state, setState ] = useState({
-    name: "",
-    phone: "",
-  });
+    const [state, setState] = useState({
+      name: '',
+      phone: '',
+    });
+  const { name, phone } = state;
+           const payload = {
+             name: name,
+             phone: phone,
+           };
+  
+  const [addContact] = useAddContactMutation(payload);
+  const { data } = useGetAllContactsQuery();
+  // const contacts = useSelector(selectAllContacts);
   const dispatch = useDispatch();
 
-  const { name, phone } = state;
+
   console.log("name", name, "number", phone)
 
 
   const handleInputChange = (e) => setState({ ...state, [e.target.name]: e.target.value });
-      const handleSubmit = e => {
+      const handleSubmit = (e) => {
 
         e.preventDefault();
 
-        for (let contact of contacts) {
+        for (let contact of data) {
           console.log(contact)
         if (contact.name.toLowerCase() === name.toLowerCase()) {
           alert(`${contact.name} is already in contacts`);
@@ -35,12 +45,8 @@ const ContactForm = () => {
             return;
           }
         }
-        const payload = {
-          name: name, 
-          phone: phone,
-        }
-        const disValue = dispatch(fetchAddContacts(payload))
-        console.log(disValue);
+        addContact(payload);
+        toastr.success("Created!")
         reset();
     }
     const reset = () => {
